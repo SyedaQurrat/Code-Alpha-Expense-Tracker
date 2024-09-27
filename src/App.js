@@ -1,25 +1,46 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { Typography, Box } from '@mui/material';
+import Balance from './components/Balance';
+import ExpenseCard from './components/ExpenseCard';
+import NewTransactions from './components/newTransactions';
+import ExpenseList from './components/ExpenseList'; 
 
-function App() {
+const App = () => {
+  const [transactions, setTransactions] = useState([]);
+  const [income, setIncome] = useState(0);
+  const [expense, setExpense] = useState(0);
+  
+  const handleTransaction = (name, amount, type) => {
+    const transaction = {
+      name,
+      amount,
+      type,
+      date: new Date().toLocaleDateString() 
+    };
+    
+    setTransactions(prev => [...prev, transaction]);
+    
+    if (type === 'debit') {
+      setIncome(prev => prev + amount);
+    } else if (type === 'credit') {
+      setExpense(prev => prev + amount);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box className="App">
+      <Typography variant="h4">Expense Tracker</Typography>
+      <Balance balance={income - expense} />
+      <ExpenseCard income={income} expense={expense} />
+      <NewTransactions onTransaction={handleTransaction} />
+      <ExpenseList transactions={transactions} /> 
+    </Box>
   );
 }
 
 export default App;
+
+
+
+
