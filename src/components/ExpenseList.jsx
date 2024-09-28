@@ -10,7 +10,7 @@ const ExpenseList = ({ transactions }) => {
                     <TableHead>
                         <TableRow>
                             <TableCell>S.No</TableCell>
-                            <TableCell>lDate</TableCell>
+                            <TableCell>Date</TableCell>
                             <TableCell>Expenses</TableCell>
                             <TableCell>Debit</TableCell>
                             <TableCell>Credit</TableCell>
