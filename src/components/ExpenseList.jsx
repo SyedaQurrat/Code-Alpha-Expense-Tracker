@@ -10,20 +10,21 @@ const ExpenseList = ({ transactions }) => {
                     <TableHead>
                         <TableRow>
                             <TableCell>S.No</TableCell>
+                            <TableCell>lDate</TableCell>
                             <TableCell>Expenses</TableCell>
                             <TableCell>Debit</TableCell>
                             <TableCell>Credit</TableCell>
-                            <TableCell>Date</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {transactions.map((transaction, index) => (
                             <TableRow key={index}>
                                 <TableCell>{index + 1}</TableCell>
+                                <TableCell>{transaction.date}</TableCell>
                                 <TableCell>{transaction.name}</TableCell>
                                 <TableCell>{transaction.type === 'debit' ? transaction.amount : ''}</TableCell>
                                 <TableCell>{transaction.type === 'credit' ? transaction.amount : ''}</TableCell>
-                                <TableCell>{transaction.date}</TableCell>
+                                
                             </TableRow>
                         ))}
                     </TableBody>
